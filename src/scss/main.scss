@@ -16,12 +16,12 @@
 
 .main{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0 auto;
+    width: 100%; 
     width: 78.4%;
     gap: 48px;
     .menu_desktop{
-        // width: 10.46%;
+        width: 48.977%;
         margin-top: 40px;
         .titulo_menu{
             font-size: 32px;
@@ -94,7 +94,6 @@
                 .div_checbox_tamanho{
                     max-width: 32px;
                     max-height: 32px;
-                    flex-basis: calc(20%);
                     position: relative;
                     display: flex;
                     align-items: center;
@@ -153,7 +152,59 @@
             }
         }
     }
-    .lista_produtos{
-
+    .section_lista_produtos{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        .listas_cards_produtos{
+            margin-top: 149px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 64px;
+            .card_produto{
+                // flex-basis: calc(25%);
+                .card_produto_imagem{
+                    width: 195px;
+                    height: 293px;
+                }
+                .card_produto_titulo{
+                    font-size: 14px;
+                    text-align: center;
+                    padding-top:10px;
+                }
+                .card_produto_preco{
+                    font-size: 16px;
+                    text-align: center;
+                    padding-top: 10px;
+                    font-weight: 700 ;
+                }
+                .card_produto_parcelas{
+                    font-size: 16px;
+                    text-align: center;
+                    padding-top:10px;
+                    color: rgba(102, 102, 102, 1);
+                }
+                .button_add_carrinho{
+                    font-size: 14px;
+                    text-align: center;
+                    margin:10px;
+                    color: rgb(255, 255, 255);
+                    padding: 7px 62px;
+                    border: 0;
+                    background-color: black;
+                }
+            }
+        }
+        .exibir_mais_produtos_button{
+            margin-top: 70px;
+            margin-bottom: 35px;
+            padding: 8px 31px;
+            border: 0;
+            background-color: rgba(251, 149, 62, 1);
+            width: 26.063%;
+        }
     }
 }
