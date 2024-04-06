@@ -1,1 +1,16 @@
 @import "reset";
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 0px;
+    border-bottom: 2px solid rgba(199, 199, 199, 1);
+    .conteudo_header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 78.4%;
+
+    }
+}
