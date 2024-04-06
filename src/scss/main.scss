@@ -11,6 +11,149 @@
         align-items: center;
         justify-content: space-between;
         width: 78.4%;
+    }
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 78.4%;
+    gap: 48px;
+    .menu_desktop{
+        // width: 10.46%;
+        margin-top: 40px;
+        .titulo_menu{
+            font-size: 32px;
+        }
+        .nav_menu{
+            margin-top: 65px;
+            .titulo_options_menu{
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            .section_menu_options_cors{
+                display: flex;
+                gap: 10px;
+                flex-direction: column;
+                margin-bottom: 24px;
+                .div_checbox_cors{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    .checbox_cors{
+                        position: relative;
+                        width: 16px;
+                        height: 16px;
+                        background-color: rgb(255, 255, 255);
+                        border: 1px solid;
+                        -webkit-appearance: none;
+                        &:checked{
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                width: 10px;
+                                height: 10px; 
+                                background-color: rgba(251, 149, 62, 1); 
+                            }
+                        }
+                    }
+                    .label_checbox_cors{
+                        font-size: 14px;
+                    }
+    
+                }
+                .button_mais_cores{
+                    border: 0;
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    color: rgba(102, 102, 102, 1);
+                    text-decoration: underline;
+                    background-color: white;
+                    .seta_para_baixo {
+                        border: 0.5px solid rgba(102, 102, 102, 1);
+                        border-width: 0 2px 2px 0;
+                        display: inline-block;
+                        padding: 2px;
+                        margin-left: 5px;
+                        transform: rotate(45deg);
+                        -webkit-transform: rotate(45deg);
+                      }
+                }
+            }
+            .section_menu_options_tamanhos{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-bottom: 24px;
+                margin-top: 24px;
+                .div_checbox_tamanho{
+                    max-width: 32px;
+                    max-height: 32px;
+                    flex-basis: calc(20%);
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    .label_checbox_tamanho{
+                        color: rgba(102, 102, 102, 1);
+                        position: absolute;
+                        top: 29%;
+                        left: 26%;
+                    }
+                    .checbox_tamanho{
+                        width: 32px;
+                        height: 32px;
+                        border: 1px solid;
+                        -webkit-appearance: none;
+                        &:checked{
+                            border: 1px solid rgba(251, 149, 62, 1);
+                        }
+                    }
+                }
+            }
+            .section_menu_option_preco{
+                display: flex;
+                gap: 10px;
+                flex-direction: column;
+                margin-bottom: 24px;
+                .div_checbox_preco{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    .checbox_preco{
+                        position: relative;
+                        width: 16px;
+                        height: 16px;
+                        background-color: rgb(255, 255, 255);
+                        border: 1px solid;
+                        -webkit-appearance: none;
+                        &:checked{
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                width: 10px;
+                                height: 10px; 
+                                background-color: rgba(251, 149, 62, 1); 
+                            }
+                        }
+                    }
+                    .label_checbox_preco{
+                        font-size: 14px;
+                    }
+    
+                }
+            }
+        }
+    }
+    .lista_produtos{
 
     }
 }

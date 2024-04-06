@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Desenvolvedor Cadastra</title>
+  <title>Desenvolvedor Cadastra - Teste Adilson Fernando</title>
   <link rel="stylesheet" href="main.css" />
 </head>
 
@@ -18,7 +18,111 @@
       </a>
     </section>
   </header>
+  <main class="main">
+    <section class="menu_desktop">
+      <h1 class="titulo_menu">Blusas</h1>
+      <nav class="nav_menu">
+        <h2 class="titulo_options_menu"> CORES </h2>
+        <section class="section_menu_options_cors">
+          <div class="div_checbox_cors">
+            <input class="checbox_cors" type="checkbox" id="cor_amarelo" name="cor_amarelo" />
+            <label class="label_checbox_cors"  for="cor_amarelo">Amarelo</label>
+          </div>
+          <div class="div_checbox_cors">
+            <input class="checbox_cors" type="checkbox" id="cor_azul" name="cor_azul" />
+            <label class="label_checbox_cors"  for="cor_azul">Azul</label>
+          </div>
+          <div class="div_checbox_cors">
+            <input class="checbox_cors" type="checkbox" id="cor_branco" name="cor_branco" />
+            <label class="label_checbox_cors"  for="cor_branco">Branco</label>
+          </div>
+          <div class="div_checbox_cors">
+            <input class="checbox_cors" type="checkbox" id="cor_cinza" name="cor_cinza" />
+            <label class="label_checbox_cors"  for="cor_cinza">Cinza</label>
+          </div>
+          <div class="div_checbox_cors">
+            <input class="checbox_cors" type="checkbox" id="cor_laranja" name="cor_laranja" />
+            <label class="label_checbox_cors"  for="cor_laranja">Laranja</label>
+          </div>
+          <button class="button_mais_cores" onclick="adicionar_cores()">Ver todas as cores  <i class="seta_para_baixo"></i></button>
+        </section>
+        <h2 class="titulo_options_menu"> TAMANHOS </h2>
+        <section class="section_menu_options_tamanhos">
+          <div class="div_checbox_tamanho">
+              <label class="label_checbox_tamanho" for="tamanho_p">P</label>
+              <input class="checbox_tamanho" type="checkbox" id="tamanho_p" name="tamanho_p" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_m">M</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_m" name="tamanho_m" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_g">G</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_g" name="tamanho_g" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_gg">GG</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_gg" name="tamanho_gg" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_u">U</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_u" name="tamanho_u" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_36">36</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_36" name="tamanho_36" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_38">38</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_38" name="tamanho_38" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_40">40</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_40" name="tamanho_40" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_42">42</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_42" name="tamanho_42" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_44">44</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_44" name="tamanho_44" />
+          </div>
+          <div class="div_checbox_tamanho">
+            <label class="label_checbox_tamanho" for="tamanho_46">46</label>
+            <input class="checbox_tamanho" type="checkbox" id="tamanho_46" name="tamanho_46" />
+          </div>
+        </section>
+        <h2 class="titulo_options_menu"> FAIXA DE PREÇO </h2>
+        <section class="section_menu_option_preco">
+          <div class="div_checbox_preco">
+            <input class="checbox_preco" type="checkbox" id="preco_0_50" name="preco_0_50" />
+            <label class="label_checbox_preco"  for="preco_0_50">de R$0 até R$50</label>
+          </div>
+          <div class="div_checbox_preco">
+            <input class="checbox_preco" type="checkbox" id="preco_51_150" name="preco_51_150" />
+            <label class="label_checbox_preco"  for="preco_51_150">de R$51 até R$150</label>
+          </div>
+          <div class="div_checbox_preco">
+            <input class="checbox_preco" type="checkbox" id="preco_151_300" name="preco_151_300" />
+            <label class="label_checbox_preco"  for="preco_151_300">de R$151 até R$300</label>
+          </div>
+          <div class="div_checbox_preco">
+            <input class="checbox_preco" type="checkbox" id="preco_301_500" name="preco_301_500" />
+            <label class="label_checbox_preco"  for="preco_301_500">de R$301 até R$500</label>
+          </div>
+          <div class="div_checbox_preco">
+            <input class="checbox_preco" type="checkbox" id="preco_500_mais" name="preco_500_mais" />
+            <label class="label_checbox_preco"  for="preco_500_mais">a partir de R$500</label>
+          </div>
+        </section>
+      </nav>
+    </section>
+    <section class="lista_produtos">
+
+    </section>
+
+  </main>
 </body>
 <script src="bundle.js"></script>
-
 </html>
