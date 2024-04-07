@@ -10,6 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
   main();
   const buttonMaisCores = document.querySelector(".button_mais_cores");
   buttonMaisCores.addEventListener("click", adicionar_cores);
+  const buttonOrder = document.querySelector(".button_order_produtos");
+  buttonOrder.addEventListener("click",menu_ordem);
+  var maisRecentesChecked = false;
+  var menorPrecoChecked = false;
+  var maiorPrecoChecked = false;
+
 
   async function main() {
     const products = await fetchProducts();
@@ -106,6 +112,106 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     buttonMaisCores.remove();
   }
+
+  function menu_ordem() {
+      var divButtonOrdenar = document.querySelector('.div_button_ordenar');
+
+      var existingCheckboxes = document.querySelectorAll('.checbox_ordem_produtos');
+      existingCheckboxes.forEach(function(checkbox) {
+          checkbox.remove();
+      });
+      var existingLabels = document.querySelectorAll('.label_checbox_ordem_produtos');
+      existingLabels.forEach(function(label) {
+          label.remove();
+      });
+      var existingDivs = document.querySelectorAll('.div_checbox_ordem');
+      existingDivs.forEach(function(div) {
+          div.remove();
+      });
+
+      if (existingLabels.length === 0 && existingCheckboxes.length === 0 && existingDivs.length === 0) {
+          var divMaisRecentes = document.createElement('div');
+          divMaisRecentes.className = 'div_checbox_ordem';
+
+          var maisRecentes = document.createElement('input');
+          maisRecentes.type = 'checkbox';
+          maisRecentes.className = 'checbox_ordem_produtos';
+          maisRecentes.id = 'maisRecentes';
+          maisRecentes.checked = maisRecentesChecked; // Define o estado do checkbox
+          maisRecentes.addEventListener('change', function() {
+              if (maisRecentes.checked) {
+                  menorPreco.checked = false;
+                  menorPrecoChecked = false;
+                  maiorPreco.checked = false;
+                  maiorPrecoChecked = false;
+              }
+              maisRecentesChecked = maisRecentes.checked; // Atualiza o estado da variável quando o checkbox é alterado
+          });
+          var labelMaisRecentes = document.createElement('label');
+          labelMaisRecentes.htmlFor = 'maisRecentes';
+          labelMaisRecentes.textContent = 'Mais Recentes';
+          labelMaisRecentes.className = 'label_checbox_ordem_produtos';
+
+          divMaisRecentes.appendChild(labelMaisRecentes);
+          divMaisRecentes.appendChild(maisRecentes);
+
+          var divMenorPreco = document.createElement('div');
+          divMenorPreco.className = 'div_checbox_ordem';
+
+          var menorPreco = document.createElement('input');
+          menorPreco.type = 'checkbox';
+          menorPreco.className = 'checbox_ordem_produtos';
+          menorPreco.id = 'menorPreco';
+          menorPreco.checked = menorPrecoChecked; // Define o estado do checkbox
+          menorPreco.addEventListener('change', function() {
+              if (menorPreco.checked) {
+                  maisRecentes.checked = false;
+                  maisRecentesChecked = false;
+                  maiorPreco.checked = false;
+                  maiorPrecoChecked = false;
+              }
+              menorPrecoChecked = menorPreco.checked; // Atualiza o estado da variável quando o checkbox é alterado
+          });
+          var labelMenorPreco = document.createElement('label');
+          labelMenorPreco.htmlFor = 'menorPreco';
+          labelMenorPreco.textContent = 'Menor preço';
+          labelMenorPreco.className = 'label_checbox_ordem_produtos';
+
+          divMenorPreco.appendChild(labelMenorPreco);
+          divMenorPreco.appendChild(menorPreco);
+
+          var divMaiorPreco = document.createElement('div');
+          divMaiorPreco.className = 'div_checbox_ordem';
+
+          var maiorPreco = document.createElement('input');
+          maiorPreco.type = 'checkbox';
+          maiorPreco.className = 'checbox_ordem_produtos';
+          maiorPreco.id = 'maiorPreco';
+          maiorPreco.checked = maiorPrecoChecked; // Define o estado do checkbox
+          maiorPreco.addEventListener('change', function() {
+              if (maiorPreco.checked) {
+                  maisRecentes.checked = false;
+                  maisRecentesChecked = false;
+                  menorPreco.checked = false;
+                  menorPrecoChecked = false;
+              }
+              maiorPrecoChecked = maiorPreco.checked; // Atualiza o estado da variável quando o checkbox é alterado
+          });
+          var labelMaiorPreco = document.createElement('label');
+          labelMaiorPreco.htmlFor = 'maiorPreco';
+          labelMaiorPreco.textContent = 'Maior preço';
+          labelMaiorPreco.className = 'label_checbox_ordem_produtos';
+
+          divMaiorPreco.appendChild(labelMaiorPreco);
+          divMaiorPreco.appendChild(maiorPreco);
+
+          divButtonOrdenar.appendChild(divMaisRecentes);
+          divButtonOrdenar.appendChild(divMenorPreco);
+          divButtonOrdenar.appendChild(divMaiorPreco);
+      }
+  }
+
+
 });
 
 
