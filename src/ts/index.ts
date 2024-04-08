@@ -3,9 +3,16 @@ import { Product } from "./Product";
 const serverUrl = "http://localhost:5000";
 
 document.addEventListener("DOMContentLoaded", function() {
+
+  async function main() {
+    const products = await fetchProducts();
+    filterProducts(products);
+  }
+
   main();
+  
   const buttonMaisCores = document.querySelector(".button_mais_cores");
-  buttonMaisCores.addEventListener("click", adicionar_cores);
+  buttonMaisCores.addEventListener("click", adicionar_cores_opcao_filtro);
 
   const buttonOrder = document.querySelector(".button_order_produtos");
   buttonOrder.addEventListener("click", abrir_menu_ordem);
@@ -19,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   function handleColorChange() {
-    main(); // Chame main() após a conclusão da seleção de cores
+    main();
   }
 
   const checkboxesTamanhos = document.querySelectorAll('.checbox_tamanho');
@@ -36,15 +43,19 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   });
 
+  const checkboxesOrdem = document.querySelectorAll('.checbox_ordem_produtos');
+  checkboxesOrdem.forEach((checkbox: HTMLInputElement) => {
+    checkbox.addEventListener('change', handleOrdemChange);
+  });
+
+  function handleOrdemChange() {
+    main();
+  }
+
   let maisRecentesChecked = false;
   let menorPrecoChecked = false;
   let maiorPrecoChecked = false;
   let produtosExibidos = 10;
-
-  async function main() {
-    const products = await fetchProducts();
-    filterProducts(products);
-  }
 
   function exibirMaisProdutos() {
     produtosExibidos += 2;
@@ -125,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
         filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-    renderProducts(filteredProducts, produtosExibidos);
+    renderizarProducts(filteredProducts, produtosExibidos);
   }
 
   function obterCoresSelecionadas(): string[] {
@@ -153,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
     return faixasPrecoSelecionadas;
   }
 
-  function renderProducts(products:Product[], numerosAmostrar: number) {
+  function renderizarProducts(products:Product[], numerosAmostrar: number) {
     const listContainer = document.querySelector('.listas_cards_produtos');
     const avisoTodosMostrados = document.querySelector('.aviso_todos_mostrados');
     if (!listContainer) return;
@@ -201,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  function adicionar_cores() {
+  function adicionar_cores_opcao_filtro() {
     const sectionMenuCores = document.querySelector(".section_menu_options_cors");
 
     const coresAdicionais = ["Verde", "Vermelho", "Preto", "Rosa", "Vinho"];
@@ -258,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function() {
         labelMaisRecentes.htmlFor = 'maisRecentes';
         labelMaisRecentes.textContent = 'Mais Recentes';
         labelMaisRecentes.className = 'label_checbox_ordem_produtos';
+        maisRecentes.addEventListener('change', handleOrdemChange);
 
         divMaisRecentes.appendChild(labelMaisRecentes);
         divMaisRecentes.appendChild(maisRecentes);
@@ -283,6 +295,7 @@ document.addEventListener("DOMContentLoaded", function() {
         labelMenorPreco.htmlFor = 'menorPreco';
         labelMenorPreco.textContent = 'Menor preço';
         labelMenorPreco.className = 'label_checbox_ordem_produtos';
+        menorPreco.addEventListener('change', handleOrdemChange);
 
         divMenorPreco.appendChild(labelMenorPreco);
         divMenorPreco.appendChild(menorPreco);
@@ -308,17 +321,18 @@ document.addEventListener("DOMContentLoaded", function() {
         labelMaiorPreco.htmlFor = 'maiorPreco';
         labelMaiorPreco.textContent = 'Maior preço';
         labelMaiorPreco.className = 'label_checbox_ordem_produtos';
-
+        maiorPreco.addEventListener('change', handleOrdemChange);
+        
         divMaiorPreco.appendChild(labelMaiorPreco);
         divMaiorPreco.appendChild(maiorPreco);
 
         divButtonOrdenar.appendChild(divMaisRecentes);
         divButtonOrdenar.appendChild(divMenorPreco);
         divButtonOrdenar.appendChild(divMaiorPreco);
+
     }else{
       fechar_menu_ordem();
     }
-    verificaChecboxOrder();
   }
 
   function fechar_menu_ordem() {
@@ -334,49 +348,6 @@ document.addEventListener("DOMContentLoaded", function() {
     existingDivs.forEach(function(div) {
         div.remove();
     });
-  }
-  
-  function verificaChecboxOrder(){
-    const maisRecentesCheckbox = document.getElementById('maisRecentes');
-    const maiorPrecoCheckbox = document.getElementById('maiorPreco');
-    const menorPrecoCheckbox = document.getElementById('menorPreco');
-
-    setTimeout(() => {
-      maisRecentesCheckbox.addEventListener('change', function (event) {
-        if (event.target instanceof HTMLInputElement) {
-            let check =  event.target.checked;
-            if(check){
-              maisRecentesChecked = true
-              menorPrecoChecked = false;
-              maiorPrecoChecked = false;
-            }
-        }
-      });
-
-      maiorPrecoCheckbox.addEventListener('change', function (event) {
-        if (event.target instanceof HTMLInputElement) {
-            let check =  event.target.checked;
-            if(check){
-              maisRecentesChecked = false;
-              menorPrecoChecked = true;
-              maiorPrecoChecked = false;
-            }
-        }
-      });
-
-      menorPrecoCheckbox.addEventListener('change', function (event) {
-        if (event.target instanceof HTMLInputElement) {
-            let check =  event.target.checked;
-            if(check){
-              maisRecentesChecked = false;
-              menorPrecoChecked = false;
-              maiorPrecoChecked = true;
-            }
-        }
-      });
-      main();
-      fechar_menu_ordem()
-    }, 1500);
   }
 
 });
