@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   main();
-  
+
+  let carrinhoDeCompras: Product[] = [];
+
   const buttonMaisCores = document.querySelector(".button_mais_cores");
   buttonMaisCores.addEventListener("click", adicionar_cores_opcao_filtro);
 
@@ -197,6 +199,10 @@ document.addEventListener("DOMContentLoaded", function() {
       button.classList.add('button_add_carrinho');
       button.textContent = 'COMPRAR';
 
+      button.addEventListener('click', () => {
+        adicionarAoCarrinho(product);
+      });
+
       card.appendChild(image);
       card.appendChild(title);
       card.appendChild(price);
@@ -210,6 +216,12 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         avisoTodosMostrados.textContent = "";
     }
+  }
+
+  function adicionarAoCarrinho(product: Product) {
+    carrinhoDeCompras.push(product);
+    console.log(carrinhoDeCompras)
+    alert(`Produto "${product.name}" adicionado ao carrinho de compras!`)
   }
 
   function adicionar_cores_opcao_filtro() {
