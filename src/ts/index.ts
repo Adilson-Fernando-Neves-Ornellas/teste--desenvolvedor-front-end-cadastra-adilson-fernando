@@ -220,7 +220,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function adicionarAoCarrinho(product: Product) {
     carrinhoDeCompras.push(product);
-    console.log(carrinhoDeCompras)
     alert(`Produto "${product.name}" adicionado ao carrinho de compras!`)
   }
 

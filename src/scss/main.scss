@@ -18,11 +18,17 @@
     display: flex;
     margin: 0 auto; 
     width: 78.4%;
+    @media (max-width: 1100px) {
+        width: 91.42%;
+    }
     gap: 48px;
     .menu_desktop{
         width: 53.17%;
         max-width: 157px;
         margin-top: 40px;
+        @media (max-width: 1100px) {
+            display: none;
+        }
         .titulo_menu{
             font-size: 32px;
         }
@@ -166,6 +172,9 @@
             margin-top: 53px;
             margin-bottom: 54px;
             flex-direction: column;
+            @media (max-width: 1100px) {
+                display: none;
+            }
             .button_order_produtos{
                 display: flex;
                 align-items: center;
@@ -228,6 +237,41 @@
                 }
             }
         }
+        .titulo_listagem_mobile{
+            text-align: center;
+            margin-top: 24px;
+            font-size: 32px;
+            @media (min-width: 1101px) {
+                display: none;
+            }
+        }
+        .div_buttons_filtros_e_ordenacao_mobile{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 12px;
+            margin-bottom: 35px;
+            width: 100%;
+            @media (min-width: 1101px) {
+                display: none;
+            }
+            .button_filter_produtos_mobile{
+                width: 50%;
+                background-color: white;
+                font-size: 16px;
+                text-align: center;
+                border: 1px solid rgba(0, 0, 0, 0.5);
+                height: 49px;
+            }
+            .button_order_produtos_mobile{
+                width: 50%;
+                background-color: white;
+                font-size: 16px;
+                text-align: center;
+                border: 1px solid rgba(0, 0, 0, 0.5);
+                height: 49px;
+            }
+        }
 
         .listas_cards_produtos{
             display: flex;
@@ -235,35 +279,54 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 64px;
+            @media (max-width: 1100px) {
+                gap: 19px;
+            }
             .card_produto{
                 // flex-basis: calc(25%);
                 .card_produto_imagem{
                     width: 195px;
                     height: 293px;
+                    @media (max-width: 1100px) {
+                        width: 161.79px;
+                        height: 242.55px;
+                    }
                 }
                 .card_produto_titulo{
                     font-size: 14px;
                     text-align: center;
                     padding-top:10px;
+                    @media (max-width: 1100px) {
+                        max-width: 162px;
+                    }
                 }
                 .card_produto_preco{
                     font-size: 16px;
                     text-align: center;
                     padding-top: 10px;
                     font-weight: 700 ;
+                    @media (max-width: 1100px) {
+                        max-width: 162px;
+                    }
                 }
                 .card_produto_parcelas{
                     font-size: 16px;
                     text-align: center;
                     padding-top:10px;
                     color: rgba(102, 102, 102, 1);
+                    @media (max-width: 1100px) {
+                        max-width: 162px;
+                    }
                 }
                 .button_add_carrinho{
                     font-size: 14px;
                     text-align: center;
-                    margin:10px;
+                    margin: 10px 0px;
                     color: rgb(255, 255, 255);
                     padding: 7px 62px;
+                    @media (max-width: 1100px) {
+                        padding: 7px 44.6px;
+                    }
                     border: 0;
                     background-color: black;
                 }
@@ -276,6 +339,9 @@
             border: 0;
             background-color: rgba(251, 149, 62, 1);
             width: 26.063%;
+            @media (max-width: 1100px) {
+                width: 69.099%;
+            }
         }
         .aviso_todos_mostrados{
             text-align: center;
