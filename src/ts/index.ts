@@ -8,17 +8,19 @@ document.addEventListener("DOMContentLoaded", function() {
   buttonMaisCores.addEventListener("click", adicionar_cores);
 
   const buttonOrder = document.querySelector(".button_order_produtos");
-  buttonOrder.addEventListener("click", menu_ordem);
+  buttonOrder.addEventListener("click", abrir_menu_ordem);
 
   const buttonExibirMais = document.querySelector(".exibir_mais_produtos_button");
   buttonExibirMais.addEventListener("click", exibirMaisProdutos);
 
   const checkboxesCores = document.querySelectorAll('.checbox_cors');
   checkboxesCores.forEach((checkbox: HTMLInputElement) => {
-      checkbox.addEventListener('change', () => {
-          main();
-      });
+    checkbox.addEventListener('change', handleColorChange);
   });
+
+  function handleColorChange() {
+    main(); // Chame main() após a conclusão da seleção de cores
+  }
 
   const checkboxesTamanhos = document.querySelectorAll('.checbox_tamanho');
   checkboxesTamanhos.forEach((checkbox: HTMLInputElement) => {
@@ -222,25 +224,17 @@ document.addEventListener("DOMContentLoaded", function() {
         divCheckbox.appendChild(inputCheckbox);
         divCheckbox.appendChild(labelCheckbox);
         sectionMenuCores.appendChild(divCheckbox);
+        inputCheckbox.addEventListener('change', handleColorChange);
     });
+
     buttonMaisCores.remove();
   }
 
-  function menu_ordem() {
+  function abrir_menu_ordem() {
     let divButtonOrdenar = document.querySelector('.div_button_ordenar');
-
     let existingCheckboxes = document.querySelectorAll('.checbox_ordem_produtos');
-    existingCheckboxes.forEach(function(checkbox) {
-        checkbox.remove();
-    });
     let existingLabels = document.querySelectorAll('.label_checbox_ordem_produtos');
-    existingLabels.forEach(function(label) {
-        label.remove();
-    });
     let existingDivs = document.querySelectorAll('.div_checbox_ordem');
-    existingDivs.forEach(function(div) {
-        div.remove();
-    });
 
     if (existingLabels.length === 0 && existingCheckboxes.length === 0 && existingDivs.length === 0) {
         let divMaisRecentes = document.createElement('div');
@@ -321,8 +315,25 @@ document.addEventListener("DOMContentLoaded", function() {
         divButtonOrdenar.appendChild(divMaisRecentes);
         divButtonOrdenar.appendChild(divMenorPreco);
         divButtonOrdenar.appendChild(divMaiorPreco);
+    }else{
+      fechar_menu_ordem();
     }
     verificaChecboxOrder();
+  }
+
+  function fechar_menu_ordem() {
+    let existingCheckboxes = document.querySelectorAll('.checbox_ordem_produtos');
+    existingCheckboxes.forEach(function(checkbox) {
+        checkbox.remove();
+    });
+    let existingLabels = document.querySelectorAll('.label_checbox_ordem_produtos');
+    existingLabels.forEach(function(label) {
+        label.remove();
+    });
+    let existingDivs = document.querySelectorAll('.div_checbox_ordem');
+    existingDivs.forEach(function(div) {
+        div.remove();
+    });
   }
   
   function verificaChecboxOrder(){
@@ -364,7 +375,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
       main();
-      menu_ordem();
+      fechar_menu_ordem()
     }, 1500);
   }
 
