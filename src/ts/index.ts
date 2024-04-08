@@ -13,6 +13,27 @@ document.addEventListener("DOMContentLoaded", function() {
   const buttonExibirMais = document.querySelector(".exibir_mais_produtos_button");
   buttonExibirMais.addEventListener("click", exibirMaisProdutos);
 
+  const checkboxesCores = document.querySelectorAll('.checbox_cors');
+  checkboxesCores.forEach((checkbox: HTMLInputElement) => {
+      checkbox.addEventListener('change', () => {
+          main();
+      });
+  });
+
+  const checkboxesTamanhos = document.querySelectorAll('.checbox_tamanho');
+  checkboxesTamanhos.forEach((checkbox: HTMLInputElement) => {
+      checkbox.addEventListener('change', () => {
+          main();
+      });
+  });
+
+  const checkboxesPreco = document.querySelectorAll('.checbox_preco');
+  checkboxesPreco.forEach((checkbox: HTMLInputElement) => {
+      checkbox.addEventListener('change', () => {
+          main();
+      });
+  });
+
   let maisRecentesChecked = false;
   let menorPrecoChecked = false;
   let maiorPrecoChecked = false;
@@ -54,17 +75,80 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function filterProducts(products:Product[]){
+    let filteredProducts = products;
 
-    if (maisRecentesChecked) {
-        products = products.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    } else if (menorPrecoChecked) {
-        products = products.sort((a, b) => a.price - b.price);
-    } else if (maiorPrecoChecked) {
-        products = products.sort((a, b) => b.price - a.price);
+    const coresSelecionadas = obterCoresSelecionadas();
+    if (coresSelecionadas.length > 0) {
+        filteredProducts = filteredProducts.filter(product => {
+            const colorLowerCase = product.color.toLowerCase();
+            return coresSelecionadas.includes(colorLowerCase);
+        });
     }
 
-    renderProducts(products, produtosExibidos);
-    
+    const tamanhosSelecionados = obterTamanhosSelecionados();
+    if (tamanhosSelecionados.length > 0) {
+        filteredProducts = filteredProducts.filter(product => {
+            return product.size.some(size => tamanhosSelecionados.includes(size));
+        });
+    }
+
+    const faixasPrecoSelecionadas = obterFaixasPrecoSelecionadas();
+    if (faixasPrecoSelecionadas.length > 0) {
+        filteredProducts = filteredProducts.filter(product => {
+            const preco = product.price;
+            return faixasPrecoSelecionadas.some(faixa => {
+                switch (faixa) {
+                    case 'PRECO_0_50':
+                        return preco >= 0 && preco <= 50;
+                    case 'PRECO_51_150':
+                        return preco >= 51 && preco <= 150;
+                    case 'PRECO_151_300':
+                        return preco >= 151 && preco <= 300;
+                    case 'PRECO_301_500':
+                        return preco >= 301 && preco <= 500;
+                    case 'PRECO_500_MAIS':
+                        return preco >= 500;
+                    default:
+                        return false;
+                }
+            });
+        });
+    }
+
+    if (maisRecentesChecked) {
+        filteredProducts = filteredProducts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    } else if (menorPrecoChecked) {
+        filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (maiorPrecoChecked) {
+        filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
+    }
+
+    renderProducts(filteredProducts, produtosExibidos);
+  }
+
+  function obterCoresSelecionadas(): string[] {
+    const coresSelecionadas: string[] = [];
+    const checkboxes = document.querySelectorAll('.checbox_cors:checked');
+    checkboxes.forEach((checkbox: HTMLInputElement) => {
+        coresSelecionadas.push(checkbox.name.split('_')[1]);
+    });
+    return coresSelecionadas;
+  }
+
+  function obterTamanhosSelecionados(): string[] {
+    const checkboxes = document.querySelectorAll('.checbox_tamanho:checked');
+    const tamanhosSelecionados = Array.from(checkboxes).map((checkbox: HTMLInputElement) => {
+        return checkbox.id.slice('TAMANHO_'.length).toUpperCase(); 
+    });
+    return tamanhosSelecionados;
+  }
+
+  function obterFaixasPrecoSelecionadas(): string[] {
+    const checkboxes = document.querySelectorAll('.checbox_preco:checked');
+    const faixasPrecoSelecionadas = Array.from(checkboxes).map((checkbox: HTMLInputElement) => {
+        return checkbox.id.toUpperCase(); 
+    });
+    return faixasPrecoSelecionadas;
   }
 
   function renderProducts(products:Product[], numerosAmostrar: number) {
