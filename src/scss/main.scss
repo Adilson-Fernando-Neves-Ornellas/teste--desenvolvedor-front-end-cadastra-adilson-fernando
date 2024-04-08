@@ -269,11 +269,15 @@
         }
         .exibir_mais_produtos_button{
             margin-top: 70px;
-            margin-bottom: 35px;
             padding: 8px 31px;
+            margin-bottom: 10px;
             border: 0;
             background-color: rgba(251, 149, 62, 1);
             width: 26.063%;
+        }
+        .aviso_todos_mostrados{
+            text-align: center;
+            margin-bottom: 25px;
         }
     }
 }
