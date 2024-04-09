@@ -36,8 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
   buttonOrdemMenuMobile.addEventListener("click", handleMenuOrdemMobile);
 
   const buttonFecharOrdemMenuMobile = document.querySelector('.button_close_menu_ordem_mobile');
-  buttonFecharOrdemMenuMobile.addEventListener("click", handleMenuOrdemMobile);
-  
+  buttonFecharOrdemMenuMobile.addEventListener("click", handleMenuOrdemMobile);  
 
   const checkboxesCores = document.querySelectorAll('.checbox_cors');
   checkboxesCores.forEach((checkbox: HTMLInputElement) => {
@@ -238,6 +237,8 @@ document.addEventListener("DOMContentLoaded", function() {
   function adicionarAoCarrinho(product: Product) {
     carrinhoDeCompras.push(product);
     alert(`Produto "${product.name}" adicionado ao carrinho de compras!`)
+    console.log("Segue abaixo seu carrinho de compra: ")
+    console.log(carrinhoDeCompras)
   }
 
   function adicionar_cores_opcao_filtro() {
@@ -508,6 +509,7 @@ document.addEventListener("DOMContentLoaded", function() {
         div.remove();
     });
   }
+
 });
 
 
