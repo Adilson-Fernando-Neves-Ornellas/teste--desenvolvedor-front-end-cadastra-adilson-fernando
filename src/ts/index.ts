@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let carrinhoDeCompras: Product[] = [];
 
+  let coresSelecionadas: String[] = [];
+  let tamanhosSelecionados: String[] = [];
+  let faixasPrecoSelecionadas: String[] = [];
+
   const buttonMaisCores = document.querySelector(".button_mais_cores");
   buttonMaisCores.addEventListener("click", adicionar_cores_opcao_filtro);
 
@@ -21,6 +25,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const buttonExibirMais = document.querySelector(".exibir_mais_produtos_button");
   buttonExibirMais.addEventListener("click", exibirMaisProdutos);
+
+  const buttonFiltrarMenuMobile = document.querySelector('.button_filter_produtos_mobile');
+  buttonFiltrarMenuMobile.addEventListener("click", handleMenuFiltrarMobile);
+
+  const buttonFecharFiltrarMenuMobile = document.querySelector('.button_close_menu_filter_mobile');
+  buttonFecharFiltrarMenuMobile.addEventListener("click", handleMenuFiltrarMobile);
+
+  const buttonOrdemMenuMobile = document.querySelector('.button_order_produtos_mobile');
+  buttonOrdemMenuMobile.addEventListener("click", handleMenuOrdemMobile);
+
+  const buttonFecharOrdemMenuMobile = document.querySelector('.button_close_menu_ordem_mobile');
+  buttonFecharOrdemMenuMobile.addEventListener("click", handleMenuOrdemMobile);
+  
 
   const checkboxesCores = document.querySelectorAll('.checbox_cors');
   checkboxesCores.forEach((checkbox: HTMLInputElement) => {
@@ -92,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function filterProducts(products:Product[]){
     let filteredProducts = products;
 
-    const coresSelecionadas = obterCoresSelecionadas();
+    coresSelecionadas = obterCoresSelecionadas();
     if (coresSelecionadas.length > 0) {
         filteredProducts = filteredProducts.filter(product => {
             const colorLowerCase = product.color.toLowerCase();
@@ -100,14 +117,14 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    const tamanhosSelecionados = obterTamanhosSelecionados();
+    tamanhosSelecionados = obterTamanhosSelecionados();
     if (tamanhosSelecionados.length > 0) {
         filteredProducts = filteredProducts.filter(product => {
             return product.size.some(size => tamanhosSelecionados.includes(size));
         });
     }
 
-    const faixasPrecoSelecionadas = obterFaixasPrecoSelecionadas();
+    faixasPrecoSelecionadas = obterFaixasPrecoSelecionadas();
     if (faixasPrecoSelecionadas.length > 0) {
         filteredProducts = filteredProducts.filter(product => {
             const preco = product.price;
@@ -361,6 +378,136 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
+  function handleMenuFiltrarMobile() {
+    const modal = document.getElementsByClassName('modal_filter_produtos')[0] as HTMLElement;
+
+    if (modal.style.display === "block") {
+        modal.style.display = "none"; 
+    } else {
+        modal.style.display = "block"; 
+    }
+  }
+
+  function handleMenuOrdemMobile() {
+    const modal = document.getElementsByClassName('modal_ordem_produtos')[0] as HTMLElement;
+
+    if (modal.style.display === "block") {
+        modal.style.display = "none";
+        fechar_menu_ordem_mobile();
+      } else {
+        modal.style.display = "block";
+        abrir_menu_ordem_mobile();
+    }
+  }
+  
+  function abrir_menu_ordem_mobile() {
+    let divButtonOrdenar = document.querySelector('.main_menu_ordem_mobile');
+    let existingCheckboxes = document.querySelectorAll('.checbox_ordem_produtos');
+    let existingLabels = document.querySelectorAll('.label_checbox_ordem_produtos');
+    let existingDivs = document.querySelectorAll('.div_checbox_ordem');
+
+    if (existingLabels.length === 0 && existingCheckboxes.length === 0 && existingDivs.length === 0) {
+        let divMaisRecentes = document.createElement('div');
+        divMaisRecentes.className = 'div_checbox_ordem';
+
+        let maisRecentes = document.createElement('input');
+        maisRecentes.type = 'checkbox';
+        maisRecentes.className = 'checbox_ordem_produtos';
+        maisRecentes.id = 'maisRecentes';
+        maisRecentes.checked = maisRecentesChecked;
+        maisRecentes.addEventListener('change', function() {
+            if (maisRecentes.checked) {
+                menorPreco.checked = false;
+                menorPrecoChecked = false;
+                maiorPreco.checked = false;
+                maiorPrecoChecked = false;
+            }
+            maisRecentesChecked = maisRecentes.checked; 
+        });
+        let labelMaisRecentes = document.createElement('label');
+        labelMaisRecentes.htmlFor = 'maisRecentes';
+        labelMaisRecentes.textContent = 'Mais Recentes';
+        labelMaisRecentes.className = 'label_checbox_ordem_produtos';
+        maisRecentes.addEventListener('change', handleOrdemChange);
+
+        divMaisRecentes.appendChild(labelMaisRecentes);
+        divMaisRecentes.appendChild(maisRecentes);
+
+        let divMenorPreco = document.createElement('div');
+        divMenorPreco.className = 'div_checbox_ordem';
+
+        let menorPreco = document.createElement('input');
+        menorPreco.type = 'checkbox';
+        menorPreco.className = 'checbox_ordem_produtos';
+        menorPreco.id = 'menorPreco';
+        menorPreco.checked = menorPrecoChecked; 
+        menorPreco.addEventListener('change', function() {
+            if (menorPreco.checked) {
+                maisRecentes.checked = false;
+                maisRecentesChecked = false;
+                maiorPreco.checked = false;
+                maiorPrecoChecked = false;
+            }
+            menorPrecoChecked = menorPreco.checked; 
+        });
+        let labelMenorPreco = document.createElement('label');
+        labelMenorPreco.htmlFor = 'menorPreco';
+        labelMenorPreco.textContent = 'Menor preço';
+        labelMenorPreco.className = 'label_checbox_ordem_produtos';
+        menorPreco.addEventListener('change', handleOrdemChange);
+
+        divMenorPreco.appendChild(labelMenorPreco);
+        divMenorPreco.appendChild(menorPreco);
+
+        let divMaiorPreco = document.createElement('div');
+        divMaiorPreco.className = 'div_checbox_ordem';
+
+        let maiorPreco = document.createElement('input');
+        maiorPreco.type = 'checkbox';
+        maiorPreco.className = 'checbox_ordem_produtos';
+        maiorPreco.id = 'maiorPreco';
+        maiorPreco.checked = maiorPrecoChecked; 
+        maiorPreco.addEventListener('change', function() {
+            if (maiorPreco.checked) {
+                maisRecentes.checked = false;
+                maisRecentesChecked = false;
+                menorPreco.checked = false;
+                menorPrecoChecked = false;
+            }
+            maiorPrecoChecked = maiorPreco.checked;
+        });
+        let labelMaiorPreco = document.createElement('label');
+        labelMaiorPreco.htmlFor = 'maiorPreco';
+        labelMaiorPreco.textContent = 'Maior preço';
+        labelMaiorPreco.className = 'label_checbox_ordem_produtos';
+        maiorPreco.addEventListener('change', handleOrdemChange);
+        
+        divMaiorPreco.appendChild(labelMaiorPreco);
+        divMaiorPreco.appendChild(maiorPreco);
+
+        divButtonOrdenar.appendChild(divMaisRecentes);
+        divButtonOrdenar.appendChild(divMenorPreco);
+        divButtonOrdenar.appendChild(divMaiorPreco);
+
+    }else{
+      fechar_menu_ordem_mobile();
+    }
+  }
+
+  function fechar_menu_ordem_mobile() {
+    let existingCheckboxes = document.querySelectorAll('.checbox_ordem_produtos');
+    existingCheckboxes.forEach(function(checkbox) {
+        checkbox.remove();
+    });
+    let existingLabels = document.querySelectorAll('.label_checbox_ordem_produtos');
+    existingLabels.forEach(function(label) {
+        label.remove();
+    });
+    let existingDivs = document.querySelectorAll('.div_checbox_ordem');
+    existingDivs.forEach(function(div) {
+        div.remove();
+    });
+  }
 });
 
 
