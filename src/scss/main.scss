@@ -271,82 +271,105 @@
                 border: 0;
                 font-size: 14px;
             }
-            .div_button_menu_filter_mobile_cores{
-                width: 100%;
-                .button_menu_filter_mobile_cores{
-                    display: flex;
-                    align-items: center;
-                    background-color: white;
-                    font-size: 16px;
-                    padding: 10px;
-                    justify-content: space-between;
+            .main_menu_filter_mobile{
+                .div_button_menu_filter_mobile_cores{
                     width: 100%;
-                    max-height: 42px;
-                    border: 0;
-                    height: 42px;
-                    color: rgba(102, 102, 102, 1);
-                    .seta_para_baixo_ordenar{
-                        border: 0.5px solid rgba(102, 102, 102, 1);
-                        border-width: 0 2px 2px 0;
-                        display: inline-block;
-                        padding: 4px;
-                        margin-left: 5px;
-                        transform: rotate(45deg);
-                        -webkit-transform: rotate(45deg);
+                    .button_menu_filter_mobile_cores{
+                        display: flex;
+                        align-items: center;
+                        background-color: white;
+                        font-size: 16px;
+                        padding: 10px;
+                        justify-content: space-between;
+                        width: 100%;
+                        max-height: 42px;
+                        border: 0;
+                        height: 42px;
+                        color: rgba(102, 102, 102, 1);
+                        .seta_para_baixo_ordenar{
+                            border: 0.5px solid rgba(102, 102, 102, 1);
+                            border-width: 0 2px 2px 0;
+                            display: inline-block;
+                            padding: 4px;
+                            margin-left: 5px;
+                            transform: rotate(45deg);
+                            -webkit-transform: rotate(45deg);
+                        }
+                    }
+                    
+                }
+                .div_button_menu_filter_mobile_tamanhos{
+                    width: 100%;
+                    .button_menu_filter_mobile_tamanhos{
+                        display: flex;
+                        align-items: center;
+                        background-color: white;
+                        font-size: 16px;
+                        padding: 10px;
+                        justify-content: space-between;
+                        width: 100%;
+                        max-height: 42px;
+                        border: 0;
+                        height: 42px;
+                        color: rgba(102, 102, 102, 1);
+                        .seta_para_baixo_ordenar{
+                            border: 0.5px solid rgba(102, 102, 102, 1);
+                            border-width: 0 2px 2px 0;
+                            display: inline-block;
+                            padding: 4px;
+                            margin-left: 5px;
+                            transform: rotate(45deg);
+                            -webkit-transform: rotate(45deg);
+                        }
+                    }
+                    
+                }
+                .div_button_menu_filter_mobile_precos{
+                    width: 100%;
+                    .button_menu_filter_mobile_precos{
+                        display: flex;
+                        align-items: center;
+                        background-color: white;
+                        font-size: 16px;
+                        padding: 10px;
+                        justify-content: space-between;
+                        width: 100%;
+                        max-height: 42px;
+                        border: 0;
+                        height: 42px;
+                        color: rgba(102, 102, 102, 1);
+                        .seta_para_baixo_ordenar{
+                            border: 0.5px solid rgba(102, 102, 102, 1);
+                            border-width: 0 2px 2px 0;
+                            display: inline-block;
+                            padding: 4px;
+                            margin-left: 5px;
+                            transform: rotate(45deg);
+                            -webkit-transform: rotate(45deg);
+                        }
                     }
                 }
-                
-            }
-            .div_button_menu_filter_mobile_tamanhos{
-                width: 100%;
-                .button_menu_filter_mobile_tamanhos{
+                .section_limpar_aplicar_filtro_produtos{
                     display: flex;
                     align-items: center;
-                    background-color: white;
-                    font-size: 16px;
-                    padding: 10px;
                     justify-content: space-between;
-                    width: 100%;
-                    max-height: 42px;
-                    border: 0;
-                    height: 42px;
+                    gap: 23px;
+                    padding: 10px;
+                }
+                .button_aplicar_filtro_produtos,.button_limpar_filtro_produtos{
+                    border: 1px solid rgba(102, 102, 102, 1);
+                    background-color: transparent;
+                    font-size: 14px;
                     color: rgba(102, 102, 102, 1);
-                    .seta_para_baixo_ordenar{
-                        border: 0.5px solid rgba(102, 102, 102, 1);
-                        border-width: 0 2px 2px 0;
-                        display: inline-block;
-                        padding: 4px;
-                        margin-left: 5px;
-                        transform: rotate(45deg);
-                        -webkit-transform: rotate(45deg);
+                    text-align: center;
+                    width: 100%;
+                    padding: 8px;
+                    &:active {
+                        background-color: rgba(251, 149, 62, 1);
+                        color: white;
                     }
                 }
-                
-            }
-            .div_button_menu_filter_mobile_precos{
-                width: 100%;
-                .button_menu_filter_mobile_precos{
-                    display: flex;
-                    align-items: center;
-                    background-color: white;
-                    font-size: 16px;
-                    padding: 10px;
-                    justify-content: space-between;
-                    width: 100%;
-                    max-height: 42px;
-                    border: 0;
-                    height: 42px;
-                    color: rgba(102, 102, 102, 1);
-                    .seta_para_baixo_ordenar{
-                        border: 0.5px solid rgba(102, 102, 102, 1);
-                        border-width: 0 2px 2px 0;
-                        display: inline-block;
-                        padding: 4px;
-                        margin-left: 5px;
-                        transform: rotate(45deg);
-                        -webkit-transform: rotate(45deg);
-                    }
-                }
+
             }
         }
         .modal_ordem_produtos{

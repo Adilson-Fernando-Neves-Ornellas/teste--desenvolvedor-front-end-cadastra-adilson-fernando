@@ -13,35 +13,56 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let carrinhoDeCompras: Product[] = [];
 
-  let coresSelecionadas: String[] = [];
-  let tamanhosSelecionados: String[] = [];
-  let faixasPrecoSelecionadas: String[] = [];
+  let coresSelecionadas: string[] = [];
+  let tamanhosSelecionados: string[] = [];
+  let faixasPrecoSelecionadas: string[] = [];
 
+  // evento de click do button de abrir o menu desktop de mais cores
   const buttonMaisCores = document.querySelector(".button_mais_cores");
   buttonMaisCores.addEventListener("click", adicionar_cores_opcao_filtro);
-
+  // evento de abrir o modal pequeno de ordem desktop
   const buttonOrder = document.querySelector(".button_order_produtos");
   buttonOrder.addEventListener("click", abrir_menu_ordem);
-
+  // evento de mostrar mais produtos
   const buttonExibirMais = document.querySelector(".exibir_mais_produtos_button");
   buttonExibirMais.addEventListener("click", exibirMaisProdutos);
-
+  // evento de abrir o modal mobile de filtro de produtos
   const buttonFiltrarMenuMobile = document.querySelector('.button_filter_produtos_mobile');
   buttonFiltrarMenuMobile.addEventListener("click", handleMenuFiltrarMobile);
-
+  // evento de fechar o modal de filtro de produtos mobile
   const buttonFecharFiltrarMenuMobile = document.querySelector('.button_close_menu_filter_mobile');
-  buttonFecharFiltrarMenuMobile.addEventListener("click", handleMenuFiltrarMobile);
-
+  buttonFecharFiltrarMenuMobile.addEventListener("click", fecharELimparMenuFiltrarMobile);
+  // evento de abrir o modal mobile de ordem de produtos
   const buttonOrdemMenuMobile = document.querySelector('.button_order_produtos_mobile');
   buttonOrdemMenuMobile.addEventListener("click", handleMenuOrdemMobile);
-
+  // evento de fechar o modal mobile de ordem de produtos
   const buttonFecharOrdemMenuMobile = document.querySelector('.button_close_menu_ordem_mobile');
   buttonFecharOrdemMenuMobile.addEventListener("click", handleMenuOrdemMobile);  
-
+  // evento que seleciona vê as cores selecionadas
   const checkboxesCores = document.querySelectorAll('.checbox_cors');
   checkboxesCores.forEach((checkbox: HTMLInputElement) => {
     checkbox.addEventListener('change', handleColorChange);
   });
+
+  // evento de abre o modal mobile de cor dentro do modal de filtro de produtos
+  const buttonAbrirCoresFiltroMenuMobile = document.querySelector('.button_menu_filter_mobile_cores');
+  buttonAbrirCoresFiltroMenuMobile.addEventListener("click", handleAbrirCoresFiltroMenuMobile);
+
+  // evento de abre o modal mobile de tamanhos dentro do modal de filtro de produtos
+  const buttonAbrirTamanhosFiltroMenuMobile = document.querySelector('.button_menu_filter_mobile_tamanhos');
+  buttonAbrirTamanhosFiltroMenuMobile.addEventListener("click", handleAbrirTamanhosFiltroMenuMobile);
+
+  // evento de abre o modal mobile de tamanhos dentro do modal de filtro de produtos
+  const buttonAbrirFaixaPrecosFiltroMenuMobile = document.querySelector('.button_menu_filter_mobile_precos');
+  buttonAbrirFaixaPrecosFiltroMenuMobile.addEventListener("click", handleAbrirFaixaPrecosFiltroMenuMobile);
+  
+  // evento quando clica em aplicar no modal mobile de filtro de produtos
+  const buttonAplicarFiltroMenuMobile = document.querySelector('.button_aplicar_filtro_produtos');
+  buttonAplicarFiltroMenuMobile.addEventListener("click", handleMenuFiltrarMobile);
+
+  // evento quando clica em limpar no modal mobile de filtro de produtos
+  const buttonLimparFiltroMenuMobile = document.querySelector('.button_limpar_filtro_produtos');
+  buttonLimparFiltroMenuMobile.addEventListener("click", fecharELimparMenuFiltrarMobile);
 
   function handleColorChange() {
     main();
@@ -67,6 +88,14 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   function handleOrdemChange() {
+    main();
+  }
+  
+  function handleTamanhosChange() {
+    main();
+  }
+
+  function handleFaixaPrecosChange() {
     main();
   }
 
@@ -110,18 +139,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
     coresSelecionadas = obterCoresSelecionadas();
     if (coresSelecionadas.length > 0) {
-        filteredProducts = filteredProducts.filter(product => {
-            const colorLowerCase = product.color.toLowerCase();
-            return coresSelecionadas.includes(colorLowerCase);
-        });
+      filteredProducts = filteredProducts.filter(product => {
+        const colorLowerCase = product.color.toLowerCase();
+        return coresSelecionadas.includes(colorLowerCase);
+      });
     }
-
+    console.log(coresSelecionadas)
+    
     tamanhosSelecionados = obterTamanhosSelecionados();
     if (tamanhosSelecionados.length > 0) {
         filteredProducts = filteredProducts.filter(product => {
             return product.size.some(size => tamanhosSelecionados.includes(size));
         });
     }
+
+    console.log(tamanhosSelecionados)
 
     faixasPrecoSelecionadas = obterFaixasPrecoSelecionadas();
     if (faixasPrecoSelecionadas.length > 0) {
@@ -146,6 +178,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    console.log(faixasPrecoSelecionadas)
+
     if (maisRecentesChecked) {
         filteredProducts = filteredProducts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     } else if (menorPrecoChecked) {
@@ -157,18 +191,20 @@ document.addEventListener("DOMContentLoaded", function() {
     renderizarProducts(filteredProducts, produtosExibidos);
   }
 
-  function obterCoresSelecionadas(): string[] {
-    const coresSelecionadas: string[] = [];
+  function obterCoresSelecionadas() {
     const checkboxes = document.querySelectorAll('.checbox_cors:checked');
+    coresSelecionadas = [];
     checkboxes.forEach((checkbox: HTMLInputElement) => {
-        coresSelecionadas.push(checkbox.name.split('_')[1]);
+      const cor = checkbox.name.split('_')[1];
+      coresSelecionadas.push(cor);
     });
     return coresSelecionadas;
   }
-
+ 
   function obterTamanhosSelecionados(): string[] {
     const checkboxes = document.querySelectorAll('.checbox_tamanho:checked');
-    const tamanhosSelecionados = Array.from(checkboxes).map((checkbox: HTMLInputElement) => {
+    coresSelecionadas = [];
+    tamanhosSelecionados = Array.from(checkboxes).map((checkbox: HTMLInputElement) => {
         return checkbox.id.slice('TAMANHO_'.length).toUpperCase(); 
     });
     return tamanhosSelecionados;
@@ -176,7 +212,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function obterFaixasPrecoSelecionadas(): string[] {
     const checkboxes = document.querySelectorAll('.checbox_preco:checked');
-    const faixasPrecoSelecionadas = Array.from(checkboxes).map((checkbox: HTMLInputElement) => {
+    faixasPrecoSelecionadas = [];
+    faixasPrecoSelecionadas = Array.from(checkboxes).map((checkbox: HTMLInputElement) => {
         return checkbox.id.toUpperCase(); 
     });
     return faixasPrecoSelecionadas;
@@ -510,6 +547,173 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
+  let secaoCoresAberta = false
+  function handleAbrirCoresFiltroMenuMobile() {
+    const sectionMenuCores = document.querySelector(".section_menu_mobile_filter_cores");
+  
+    const coresAdicionais = ["Amarelo", "Azul", "Branco", "Cinza", "Laranja", "Verde", "Vermelho", "Preto", "Rosa", "Vinho"];
+  
+    while (sectionMenuCores.firstChild) {
+      sectionMenuCores.removeChild(sectionMenuCores.firstChild);
+    }
+  
+    coresAdicionais.forEach(cor => {
+      const divCheckbox = document.createElement("div");
+      divCheckbox.classList.add("div_checbox_cors");
+  
+      const inputCheckbox = document.createElement("input");
+      inputCheckbox.classList.add("checbox_cors");
+      inputCheckbox.type = "checkbox";
+      inputCheckbox.id = `cor_${cor.toLowerCase()}`;
+      inputCheckbox.name = `cor_${cor.toLowerCase()}`;
+  
+      const labelCheckbox = document.createElement("label");
+      labelCheckbox.classList.add("label_checbox_cors");
+      labelCheckbox.htmlFor = `cor_${cor.toLowerCase()}`;
+      labelCheckbox.textContent = cor;
+  
+      divCheckbox.appendChild(inputCheckbox);
+      divCheckbox.appendChild(labelCheckbox);
+      sectionMenuCores.appendChild(divCheckbox);
+      
+      if (coresSelecionadas.includes(cor.toLowerCase())) {
+        inputCheckbox.checked = true;
+      }
+  
+      inputCheckbox.addEventListener('change', handleColorChange);
+    });
+  
+    secaoCoresAberta = !secaoCoresAberta;
+    if(secaoCoresAberta==false){
+      while (sectionMenuCores.firstChild) {
+        sectionMenuCores.removeChild(sectionMenuCores.firstChild);
+      }
+    }
+  }
+
+  let secaoTamanhosAberta = false;
+  function handleAbrirTamanhosFiltroMenuMobile() {
+    const sectionMenuTamanhos = document.querySelector(".section_menu_mobile_filter_tamanhos");
+  
+    const tamanhos = ["P", "M", "G", "GG", "U", "36", "38", "40", "42", "44", "46"];
+  
+    while (sectionMenuTamanhos.firstChild) {
+      sectionMenuTamanhos.removeChild(sectionMenuTamanhos.firstChild);
+    }
+  
+    tamanhos.forEach(tamanho => {
+      const divCheckbox = document.createElement("div");
+      divCheckbox.classList.add("div_checbox_tamanho");
+  
+      const inputCheckbox = document.createElement("input");
+      inputCheckbox.classList.add("checbox_tamanho");
+      inputCheckbox.type = "checkbox";
+      inputCheckbox.id = `tamanho_${tamanho.toLowerCase()}`;
+      inputCheckbox.name = `tamanho_${tamanho.toLowerCase()}`;
+  
+      const labelCheckbox = document.createElement("label");
+      labelCheckbox.classList.add("label_checbox_tamanho");
+      labelCheckbox.htmlFor = `tamanho_${tamanho.toLowerCase()}`;
+      labelCheckbox.textContent = tamanho;
+  
+      divCheckbox.appendChild(inputCheckbox);
+      divCheckbox.appendChild(labelCheckbox);
+      sectionMenuTamanhos.appendChild(divCheckbox);
+      inputCheckbox.addEventListener('change', handleTamanhosChange);
+    });
+  
+    secaoTamanhosAberta = !secaoTamanhosAberta;
+    if(secaoTamanhosAberta==false){
+      while (sectionMenuTamanhos.firstChild) {
+        sectionMenuTamanhos.removeChild(sectionMenuTamanhos.firstChild);
+      }
+    }
+  }
+
+  let secaoFaixaPrecosAberta = false;
+  function handleAbrirFaixaPrecosFiltroMenuMobile() {
+    const sectionMenuFaixaPrecos = document.querySelector(".section_menu_mobile_filter_faixa_precos");
+
+    const faixasPrecos = [
+      { id: "preco_0_50", label: "de R$0 até R$50" },
+      { id: "preco_51_150", label: "de R$51 até R$150" },
+      { id: "preco_151_300", label: "de R$151 até R$300" },
+      { id: "preco_301_500", label: "de R$301 até R$500" },
+      { id: "preco_500_mais", label: "a partir de R$500" }
+    ];
+  
+    while (sectionMenuFaixaPrecos.firstChild) {
+      sectionMenuFaixaPrecos.removeChild(sectionMenuFaixaPrecos.firstChild);
+    }
+
+    faixasPrecos.forEach(faixa => {
+      const divCheckbox = document.createElement("div");
+      divCheckbox.classList.add("div_checbox_preco");
+  
+      const inputCheckbox = document.createElement("input");
+      inputCheckbox.classList.add("checbox_preco");
+      inputCheckbox.type = "checkbox";
+      inputCheckbox.id = faixa.id;
+      inputCheckbox.name = faixa.id;
+  
+      const labelCheckbox = document.createElement("label");
+      labelCheckbox.classList.add("label_checbox_preco");
+      labelCheckbox.htmlFor = faixa.id;
+      labelCheckbox.textContent = faixa.label;
+  
+      divCheckbox.appendChild(inputCheckbox);
+      divCheckbox.appendChild(labelCheckbox);
+      sectionMenuFaixaPrecos.appendChild(divCheckbox);
+      inputCheckbox.addEventListener('change', handleFaixaPrecosChange);
+    });
+  
+    secaoFaixaPrecosAberta = !secaoFaixaPrecosAberta;
+    if(secaoFaixaPrecosAberta==false){
+      while (sectionMenuFaixaPrecos.firstChild) {
+        sectionMenuFaixaPrecos.removeChild(sectionMenuFaixaPrecos.firstChild);
+      }
+    }
+  }
+
+  function fecharELimparMenuFiltrarMobile() {
+    const modal = document.getElementsByClassName('modal_filter_produtos')[0] as HTMLElement;
+  
+    coresSelecionadas = [];
+    tamanhosSelecionados = [];
+    faixasPrecoSelecionadas = [];
+
+    const checkboxesPreco = document.querySelectorAll('.checbox_preco');
+    checkboxesPreco.forEach((checkbox: HTMLInputElement) => {
+      checkbox.checked = false;
+    });
+  
+    const checkboxesTamanhos = document.querySelectorAll('.checbox_tamanho');
+    checkboxesTamanhos.forEach((checkbox: HTMLInputElement) => {
+      checkbox.checked = false;
+    });
+  
+    const checkboxesCores = document.querySelectorAll('.checbox_cors');
+    checkboxesCores.forEach((checkbox: HTMLInputElement) => {
+      checkbox.checked = false;
+    });
+
+    const sectionMenuFaixaPrecos = document.querySelector(".section_menu_mobile_filter_faixa_precos");
+    while (sectionMenuFaixaPrecos.firstChild) {
+      sectionMenuFaixaPrecos.removeChild(sectionMenuFaixaPrecos.firstChild);
+    }
+    const sectionMenuTamanhos = document.querySelector(".section_menu_mobile_filter_tamanhos");
+    while (sectionMenuTamanhos.firstChild) {
+      sectionMenuTamanhos.removeChild(sectionMenuTamanhos.firstChild);
+    }
+    const sectionMenuCores = document.querySelector(".section_menu_mobile_filter_cores");
+    while (sectionMenuCores.firstChild) {
+      sectionMenuCores.removeChild(sectionMenuCores.firstChild);
+    }
+    modal.style.display = (modal.style.display === "block") ? "none" : "block";
+  
+    main();
+  }
+  
 });
 
 
