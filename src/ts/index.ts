@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const buttonAbrirTamanhosFiltroMenuMobile = document.querySelector('.button_menu_filter_mobile_tamanhos');
   buttonAbrirTamanhosFiltroMenuMobile.addEventListener("click", handleAbrirTamanhosFiltroMenuMobile);
 
-  // evento de abre o modal mobile de tamanhos dentro do modal de filtro de produtos
+  // evento de abre o modal mobile de faixa de cor dentro do modal de filtro de produtos
   const buttonAbrirFaixaPrecosFiltroMenuMobile = document.querySelector('.button_menu_filter_mobile_precos');
   buttonAbrirFaixaPrecosFiltroMenuMobile.addEventListener("click", handleAbrirFaixaPrecosFiltroMenuMobile);
   
@@ -144,7 +144,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return coresSelecionadas.includes(colorLowerCase);
       });
     }
-    console.log(coresSelecionadas)
     
     tamanhosSelecionados = obterTamanhosSelecionados();
     if (tamanhosSelecionados.length > 0) {
@@ -153,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    console.log(tamanhosSelecionados)
 
     faixasPrecoSelecionadas = obterFaixasPrecoSelecionadas();
     if (faixasPrecoSelecionadas.length > 0) {
@@ -177,8 +175,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
-
-    console.log(faixasPrecoSelecionadas)
 
     if (maisRecentesChecked) {
         filteredProducts = filteredProducts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -550,7 +546,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let secaoCoresAberta = false
   function handleAbrirCoresFiltroMenuMobile() {
     const sectionMenuCores = document.querySelector(".section_menu_mobile_filter_cores");
-  
+
     const coresAdicionais = ["Amarelo", "Azul", "Branco", "Cinza", "Laranja", "Verde", "Vermelho", "Preto", "Rosa", "Vinho"];
   
     while (sectionMenuCores.firstChild) {
@@ -589,12 +585,16 @@ document.addEventListener("DOMContentLoaded", function() {
         sectionMenuCores.removeChild(sectionMenuCores.firstChild);
       }
     }
+    apagarSectionButtonSeTodosSubMenusFechado();
   }
 
   let secaoTamanhosAberta = false;
   function handleAbrirTamanhosFiltroMenuMobile() {
     const sectionMenuTamanhos = document.querySelector(".section_menu_mobile_filter_tamanhos");
   
+    const sectionButtons = document.querySelector(".section_limpar_aplicar_filtro_produtos") as HTMLElement;
+    sectionButtons.style.display = "flex";
+
     const tamanhos = ["P", "M", "G", "GG", "U", "36", "38", "40", "42", "44", "46"];
   
     while (sectionMenuTamanhos.firstChild) {
@@ -628,11 +628,15 @@ document.addEventListener("DOMContentLoaded", function() {
         sectionMenuTamanhos.removeChild(sectionMenuTamanhos.firstChild);
       }
     }
+    apagarSectionButtonSeTodosSubMenusFechado();
   }
 
   let secaoFaixaPrecosAberta = false;
   function handleAbrirFaixaPrecosFiltroMenuMobile() {
     const sectionMenuFaixaPrecos = document.querySelector(".section_menu_mobile_filter_faixa_precos");
+
+    const sectionButtons = document.querySelector(".section_limpar_aplicar_filtro_produtos") as HTMLElement;
+    sectionButtons.style.display = "flex";
 
     const faixasPrecos = [
       { id: "preco_0_50", label: "de R$0 até R$50" },
@@ -673,6 +677,16 @@ document.addEventListener("DOMContentLoaded", function() {
         sectionMenuFaixaPrecos.removeChild(sectionMenuFaixaPrecos.firstChild);
       }
     }
+    apagarSectionButtonSeTodosSubMenusFechado();
+  }
+
+  function apagarSectionButtonSeTodosSubMenusFechado(){
+    const sectionButtons = document.querySelector(".section_limpar_aplicar_filtro_produtos") as HTMLElement;
+    if(secaoFaixaPrecosAberta === false && secaoTamanhosAberta === false && secaoCoresAberta === false){
+      sectionButtons.style.display = "none";
+    }else{
+      sectionButtons.style.display = "flex";
+    }
   }
 
   function fecharELimparMenuFiltrarMobile() {
@@ -709,6 +723,10 @@ document.addEventListener("DOMContentLoaded", function() {
     while (sectionMenuCores.firstChild) {
       sectionMenuCores.removeChild(sectionMenuCores.firstChild);
     }
+
+    const sectionButtons = document.querySelector(".section_limpar_aplicar_filtro_produtos") as HTMLElement;
+    sectionButtons.style.display = "none";
+
     modal.style.display = (modal.style.display === "block") ? "none" : "block";
   
     main();

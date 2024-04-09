@@ -279,7 +279,8 @@
                         align-items: center;
                         background-color: white;
                         font-size: 16px;
-                        padding: 10px;
+                        padding: 16px;
+                        padding-top: 30px;
                         justify-content: space-between;
                         width: 100%;
                         max-height: 42px;
@@ -296,7 +297,42 @@
                             -webkit-transform: rotate(45deg);
                         }
                     }
-                    
+                    .section_menu_mobile_filter_cores{
+                        display: flex;
+                        gap: 10px;
+                        flex-direction: column;
+                        margin-bottom: 24px;
+                        padding: 0 16px;
+                        margin-bottom:20px;                        .div_checbox_cors{
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            .checbox_cors{
+                                position: relative;
+                                width: 16px;
+                                height: 16px;
+                                background-color: rgb(255, 255, 255);
+                                border: 1px solid;
+                                -webkit-appearance: none;
+                                &:checked{
+                                    &::before {
+                                        content: '';
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                        width: 10px;
+                                        height: 10px; 
+                                        background-color: rgba(251, 149, 62, 1); 
+                                    }
+                                }
+                            }
+                            .label_checbox_cors{
+                                font-size: 14px;
+                            }
+            
+                        }
+                    }
                 }
                 .div_button_menu_filter_mobile_tamanhos{
                     width: 100%;
@@ -305,7 +341,7 @@
                         align-items: center;
                         background-color: white;
                         font-size: 16px;
-                        padding: 10px;
+                        padding:  0 16px;
                         justify-content: space-between;
                         width: 100%;
                         max-height: 42px;
@@ -322,7 +358,38 @@
                             -webkit-transform: rotate(45deg);
                         }
                     }
-                    
+                    .section_menu_mobile_filter_tamanhos{
+                        padding:  0 16px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                        width: 40.78%;
+                        margin-bottom: 20px;
+                        .div_checbox_tamanho{
+                            max-width: 32px;
+                            max-height: 32px;
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            .label_checbox_tamanho{
+                                color: rgba(102, 102, 102, 1);
+                                position: absolute;
+                                top: 29%;
+                                left: 26%;
+                            }
+                            .checbox_tamanho{
+                                width: 32px;
+                                height: 32px;
+                                border: 1px solid;
+                                -webkit-appearance: none;
+                                margin: 0;
+                                &:checked{
+                                    border: 1px solid rgba(251, 149, 62, 1);
+                                }
+                            }
+                        }
+                    }
                 }
                 .div_button_menu_filter_mobile_precos{
                     width: 100%;
@@ -331,7 +398,7 @@
                         align-items: center;
                         background-color: white;
                         font-size: 16px;
-                        padding: 10px;
+                        padding: 0 16px;
                         justify-content: space-between;
                         width: 100%;
                         max-height: 42px;
@@ -348,28 +415,64 @@
                             -webkit-transform: rotate(45deg);
                         }
                     }
+                    .section_menu_mobile_filter_faixa_precos{
+                        display: flex;
+                        gap: 10px;
+                        flex-direction: column;
+                        margin-bottom: 30px;
+                        padding: 0 16px;
+                        .div_checbox_preco{
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            .checbox_preco{
+                                position: relative;
+                                width: 16px;
+                                height: 16px;
+                                background-color: rgb(255, 255, 255);
+                                border: 1px solid;
+                                -webkit-appearance: none;
+                                &:checked{
+                                    &::before {
+                                        content: '';
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                        width: 10px;
+                                        height: 10px; 
+                                        background-color: rgba(251, 149, 62, 1); 
+                                    }
+                                }
+                            }
+                            .label_checbox_preco{
+                                font-size: 14px;
+                            }
+            
+                        }
+                    }
                 }
                 .section_limpar_aplicar_filtro_produtos{
-                    display: flex;
+                    display: none;
+                    // display: flex;
                     align-items: center;
                     justify-content: space-between;
                     gap: 23px;
                     padding: 10px;
-                }
-                .button_aplicar_filtro_produtos,.button_limpar_filtro_produtos{
-                    border: 1px solid rgba(102, 102, 102, 1);
-                    background-color: transparent;
-                    font-size: 14px;
-                    color: rgba(102, 102, 102, 1);
-                    text-align: center;
-                    width: 100%;
-                    padding: 8px;
-                    &:active {
-                        background-color: rgba(251, 149, 62, 1);
-                        color: white;
+                    .button_aplicar_filtro_produtos,.button_limpar_filtro_produtos{
+                        border: 1px solid rgba(102, 102, 102, 1);
+                        background-color: transparent;
+                        font-size: 14px;
+                        color: rgba(102, 102, 102, 1);
+                        text-align: center;
+                        width: 100%;
+                        padding: 8px;
+                        &:active {
+                            background-color: rgba(251, 149, 62, 1);
+                            color: white;
+                        }
                     }
                 }
-
             }
         }
         .modal_ordem_produtos{
